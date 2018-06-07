@@ -1,0 +1,46 @@
+body {
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 60%;
+    float: left;
+}
+
+#add-btn {
+    margin-bottom: 20px;
+}
+
+.hideme {
+    display: none;
+}
+
+#addform {
+    width: 40%;
+    float: right;
+}
+
+.add-form, .edit-form {
+    float: left;
+}
+
+form {
+    padding-left: 50px;
+}
+
+button {
+    padding: 8px;
+}
+
+label {
+    display: block;
+}
+
+input {
+    padding: 8px;
+}
+
+.form-item {
+    padding: 10px;
+}
