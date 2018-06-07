@@ -62,6 +62,7 @@ function edit(id) {
                             data: form.serialize(),
                             dataType: 'json',
                             success: function (response) {
+                                alert(response);
                                 window.location.href='http://localhost/crud_datatable/';
                             }
                         });
@@ -74,6 +75,23 @@ function edit(id) {
 
     } else {
         alert("Error : Refresh the page again");
+    }
+}
+
+function remove(id) {
+    if(id) {
+        if(confirm("are you sure?")) {
+            $.ajax({
+                url: "process.php",
+                type: 'POST',
+                data: { record_id: id },
+                dataType: 'json',
+                success: function (response) {
+                    alert(response);
+                    window.location.href='http://localhost/crud_datatable/';
+                }
+            });
+        }
     }
 }
 

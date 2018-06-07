@@ -1,9 +1,9 @@
 <?php
 /*
-*	Date:			2018-06-07 09:25:48
-*	Description:	Handles records class
-*	Author:			@lyndonjohnv
-*/
+ *    Date:            2018-06-07 09:25:48
+ *    Description:    Handles records class
+ *    Author:            @lyndonjohnv
+ */
 
 require_once 'Database.class.php';
 
@@ -15,15 +15,15 @@ class Record
     {
         $database = new Database();
 
-		$db = $database->dbConnection();
-		$this->conn = $db;
+        $db         = $database->dbConnection();
+        $this->conn = $db;
     }
 
     public function query($sql)
-	{
-		$stmt = $this->conn->prepare($sql);
-		return $stmt;
-	}
+    {
+        $stmt = $this->conn->prepare($sql);
+        return $stmt;
+    }
 
     public function create($firstname, $lastname, $salary)
     {
@@ -31,7 +31,7 @@ class Record
 
             $this->conn->beginTransaction();
 
-            $stmt=$this->conn->prepare("INSERT INTO employees (firstname, lastname, salary) VALUES (?, ?, ?)");
+            $stmt = $this->conn->prepare("INSERT INTO employees (firstname, lastname, salary) VALUES (?, ?, ?)");
             $stmt->execute([$firstname, $lastname, $salary]);
 
             $this->conn->commit();
@@ -54,7 +54,7 @@ class Record
 
             $this->conn->beginTransaction();
 
-            $stmt=$this->conn->prepare("UPDATE employees SET firstname=?, lastname=?, salary=? WHERE id=?");
+            $stmt = $this->conn->prepare("UPDATE employees SET firstname=?, lastname=?, salary=? WHERE id=?");
             $stmt->execute([$firstname, $lastname, $salary, $id]);
 
             $this->conn->commit();
@@ -68,6 +68,26 @@ class Record
             $this->conn->rollback();
             echo $e->getMessage();
 
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->conn->beginTransaction();
+
+            $stmt = $this->conn->prepare("DELETE FROM employees WHERE id=?");
+            $stmt->execute([$id]);
+
+            $this->conn->commit();
+
+            echo json_encode("Record deleted!");
+            
+            return true;
+
+        } catch (PDOExeption $e) {
+            $this->conn->rollback();
+            echo $e->getMessage();
         }
     }
 

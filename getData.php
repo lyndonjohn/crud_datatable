@@ -16,7 +16,7 @@ try {
     $stmt->execute();
     while ($row=$stmt->fetch()) {
 
-        $actionbutton = '<button onclick="edit(' . $row['id'] . ')">Edit</button> <button onclick="delete(' . $row['id'] . ')">Delete</button>';
+        $actionbutton = '<button onclick="edit(' . $row['id'] . ')">Edit</button> <button onclick="remove(' . $row['id'] . ')">Delete</button>';
 
         $output['data'][] = [
             $row['firstname'],

@@ -46,3 +46,14 @@ if (isset($_GET['edit'])) {
         echo "Error: " . $e->getMessage();
     }
 }
+
+if(isset($_POST['record_id'])){
+    try {
+        $id = $_POST['record_id'];
+        if ($app->delete($id)) {
+            return true;
+        } 
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
