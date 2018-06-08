@@ -61,8 +61,8 @@ function edit(id) {
             
                 $("#form_edit").unbind('submit').bind('submit', function () {
                     if(confirm("check form before you submit.")) {
-                        var table = $('#example').DataTable();
                         var form = $(this);
+                        var table = $('#example').DataTable();
                         $.ajax({
                             url: form.attr('action'),
                             type: form.attr('method'),
@@ -70,7 +70,7 @@ function edit(id) {
                             dataType: 'json',
                             success: function (response) {
                                 alert(response);
-                                table.ajax.reload();
+                                table.ajax.reload(null, false);
                             }
                         });
                     }
@@ -94,7 +94,7 @@ function remove(id) {
                 dataType: 'json',
                 success: function (response) {
                     alert(response);
-                    table.ajax.reload();
+                    table.ajax.reload(null, false);
                 }
             });
         }
