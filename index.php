@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <div class="container">
         <table id="example" class="display" style="width:100%">
             <thead>
@@ -58,6 +57,8 @@
             <div class="form-item">
                 <button type="reset">Reset</button>
                 <button type="submit">Submit</button>
+
+                <button type="button" id="addbtn">Add new</button>
             </div>
         </form>
 

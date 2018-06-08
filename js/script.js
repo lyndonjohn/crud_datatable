@@ -1,9 +1,8 @@
-var tableID;
 $(document).ready(function () {
-    var tableID = $('#example').DataTable({
+    var tableID = $("#example").DataTable({
         "ajax": {
             url: "getData.php",
-            type: "GET"
+            type: "POST"
         }
     });
 
@@ -22,9 +21,18 @@ $(document).ready(function () {
                     alert(response);
                 }
             });
-            return false;
         }
+        return false;
     });
+});
+
+var addbtn = document.getElementById("addbtn");
+addbtn.addEventListener("click", function(){
+    // show add form
+    document.getElementById('form_add').classList.remove('hideme');
+        
+    // hide edit form
+    document.getElementById('form_edit').classList.add('hideme');
 });
 
 function edit(id) {
@@ -45,16 +53,15 @@ function edit(id) {
             data: { record_id: id },
             dataType: 'json',
             success: function (response) {
-
                 document.getElementById("firstname_edit").value = response.firstname;
                 document.getElementById("lastname_edit").value = response.lastname;
                 document.getElementById("salary_edit").value = response.salary;
-
                 // include record id
                 $("#form_edit").append('<input type="hidden" name="record_id" id="record_id" value="' + id + '"/>');
-
+            
                 $("#form_edit").unbind('submit').bind('submit', function () {
                     if(confirm("check form before you submit.")) {
+                        var table = $('#example').DataTable();
                         var form = $(this);
                         $.ajax({
                             url: form.attr('action'),
@@ -63,16 +70,14 @@ function edit(id) {
                             dataType: 'json',
                             success: function (response) {
                                 alert(response);
-                                window.location.href='http://localhost/crud_datatable/';
+                                table.ajax.reload();
                             }
                         });
-                        return false;
                     }
+                    return false;
                 });
-
-            } // /success
-        }); // /fetch selected member info
-
+            }
+        });
     } else {
         alert("Error : Refresh the page again");
     }
@@ -81,6 +86,7 @@ function edit(id) {
 function remove(id) {
     if(id) {
         if(confirm("are you sure?")) {
+            var table = $('#example').DataTable();
             $.ajax({
                 url: "process.php",
                 type: 'POST',
@@ -88,10 +94,11 @@ function remove(id) {
                 dataType: 'json',
                 success: function (response) {
                     alert(response);
-                    window.location.href='http://localhost/crud_datatable/';
+                    table.ajax.reload();
                 }
             });
         }
+        return false;
     }
 }
 
