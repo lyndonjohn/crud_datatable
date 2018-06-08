@@ -1,4 +1,9 @@
 <?php
+/*
+ *    Date:            2018-06-07 09:25:48
+ *    Description:    Database configurations
+ *    Author:            @lyndonjohnv
+ */
 class Database
 {
     private $host = "localhost";
